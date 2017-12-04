@@ -1,0 +1,9 @@
+microsoft
+apple
+google
+blizzard
+amd
+nvidia
+intel
+aetna
+amazon
