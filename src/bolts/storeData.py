@@ -5,11 +5,11 @@ from pymongo import MongoClient
 from streamparse import Bolt
 
 class storeDataBolt(Bolt):
-	outputs = ['dataStored']
+	outputs = []
 
 	# MongoDB connection
 	client = MongoClient('localhost', 27017)
-	redditDB - client.redditSubmissions
+	redditDB = client.redditSubmissions
 
 	def process(self, tup):
 		redditTitle = tup.values[0]
@@ -19,6 +19,7 @@ class storeDataBolt(Bolt):
 			"timestamp": datetime.datetime.utcnow()}
 		try:
 			redditSubmissions_id = redditDB['redditData'].insert_one(redditData).inserted_id
-			self.emit([dataStored = True])
+			self.logger.info("matched company [{:}]".format(redditTitle))
+			self.emit(["redditTitle"])
 		except:
-			self.emit([dataStored = False])
+			self.fail(tup)

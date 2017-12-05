@@ -1,4 +1,4 @@
-import os
+import os, re
 
 from streamparse import Bolt
 
@@ -9,12 +9,13 @@ class titleSplitterBolt(Bolt):
         redditTitle = tup.values[0]  # extract the redditTitle
         redditLink = tup.values[1]
         redditTitle = re.sub(r"[,.;!\?]", "", redditTitle)  # get rid of punctuation
-        splitTitles = [[splitTitle.strip()] for splitTitle in redditTitle.split(" ") if splitTitle.strip()]
+        splitTitles = redditTitle.split()
         if not splitTitles:
             # no splitTitles to process in the title, fail the tuple
             self.fail(tup)
             return
 
         for splitTitle in splitTitles:
+            #self.logger.info("matched company [{:}]".format(splitTitle))
             self.emit([splitTitle, redditTitle, redditLink])
         # tuple acknowledgement is handled automatically
