@@ -15,7 +15,6 @@ class matchKeywordsBolt(Bolt):
         redditLink = tup.values[2] # extract the redditLink
         # file = open("~/companynames.txt", "r")
         # companyNames = file.readlines()
-
         companyNames = ["Microsoft",
                 "Apple",
                 "google",
@@ -31,6 +30,8 @@ class matchKeywordsBolt(Bolt):
                 #sent email to company support
                 #self.sendEmail(companyName, redditTitle, redditLink)
                 self.logger.info("matched company [{:}]".format(companyName))
+                self.logger.info("Reddit Title [{:}]".format(redditTitle))
+                self.logger.info("Reddit Link [{:}]".format(redditLink))
                 self.emit([redditTitle, redditLink])
 
     # def sendEmail(self, companyName, redditTitle, redditLink):

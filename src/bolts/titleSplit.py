@@ -8,6 +8,7 @@ class titleSplitterBolt(Bolt):
     def process(self, tup):
         redditTitle = tup.values[0]  # extract the redditTitle
         redditLink = tup.values[1]
+        #self.logger.info("Reddit Title [{:}]".format(redditTitle))
         redditTitle = re.sub(r"[,.;!\?]", "", redditTitle)  # get rid of punctuation
         splitTitles = redditTitle.split()
         if not splitTitles:

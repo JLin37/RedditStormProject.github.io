@@ -23,3 +23,4 @@ class storeDataBolt(Bolt):
 			self.emit(["redditTitle"])
 		except:
 			self.fail(tup)
+			

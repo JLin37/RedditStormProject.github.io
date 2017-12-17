@@ -16,4 +16,4 @@ class WordCount(Topology):
 	matchKeywords_bolt = matchKeywordsBolt.spec(inputs = {
 		titleSplit_bolt: Grouping.fields('splitTitle')}, par = 2)
 	# storeData_bolt = storeDataBolt.spec(inputs = {
-	# 	matchKeywords_bolt: Grouping.fields('redditTitle')}, par = 2)
+	# 	matchKeywords_bolt: Grouping.fields('redditTitle')}, par = 1)
