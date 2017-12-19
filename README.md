@@ -1,5 +1,3 @@
-# RedditStormProject
-
 # What is Storm?
 
 ![image not available](http://vishnuviswanath.com/img/storm_blog_header.png)
