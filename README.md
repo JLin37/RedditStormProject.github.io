@@ -11,64 +11,64 @@ Storm was written predominantly in the Clojure programming language, but can be 
 
 # How does Storm work?
 
-
-
-Components
-
-
+# 1. Components
 
 ![picture2](https://user-images.githubusercontent.com/33638238/34182295-a41f3ffa-e4e3-11e7-93e0-8860fda6169e.png)
 
-
-
-A Storm cluster is superficially similar to a Hadoop cluster. Whereas on Hadoop you run "MapReduce jobs", on Storm you run "topologies". "Jobs" and "topologies" themselves are very different -- one key difference is that a MapReduce job eventually finishes, whereas a topology processes messages forever (or until you kill it).[1]
+A Storm cluster is superficially similar to a Hadoop cluster. Whereas on Hadoop you run "MapReduce jobs", on Storm you run "topologies". "Jobs" and "topologies" themselves are very different -- one key difference is that a MapReduce job eventually finishes, whereas a topology processes messages forever (or until you kill it).
 
 There are two kinds of nodes on a Storm cluster: the master node and the worker nodes. The master node runs a daemon called "Nimbus" that is similar to Hadoop's "JobTracker".
  
+- Nimbus: It sends codes to workers. Nimbus is also responsible for detecting when workers die and reassigning them to other machines when necessary.
 
-§  Nimbus: It sends codes to workers. Nimbus is also responsible for detecting when workers die and reassigning them to other machines when necessary.
+- Supervisors: Each worker in the Storm clusters has Supervisor daemon that executes tasks as directed the location of other worker tasks.
 
-§  Supervisors: Each worker in the Storm clusters has Supervisor daemon that executes tasks as directed the location of other worker tasks.
+- Zookeepers: Coordinate between Nimbus and the Supervisors. Storm uses Zookeeper to track configuration information about the topology; Additionally, the Nimbus daemon and Supervisor daemons are fail-fast and stateless; all state is kept in Zookeeper or on local disk. This means you can kill -9 Nimbus or the Supervisors and they'll start back up like nothing happened. This design leads to Storm clusters being incredibly stable.
 
-§  Zookeepers: Coordinate between Nimbus and the Supervisors. Storm uses Zookeeper to track configuration information about the topology; Additionally, the Nimbus daemon and Supervisor daemons are fail-fast and stateless; all state is kept in Zookeeper or on local disk. This means you can kill -9 Nimbus or the Supervisors and they'll start back up like nothing happened. This design leads to Storm clusters being incredibly stable.
-
-
-
-Topologies
+# 2. Topologies
  
  ![picture1](https://user-images.githubusercontent.com/33638238/34181883-fdeb9a58-e4e1-11e7-8b29-1382ad415ac5.png)
- 
- 
-A topology is a graph of computation. Each node in a topology contains processing logic, and links between nodes indicate how data should be passed around between nodes.[2]
+  
+A topology is a graph of computation. Each node in a topology contains processing logic, and links between nodes indicate how data should be passed around between nodes.
 
-1.   The work is delegated to different types of components that are each responsible for a simple specific processing task.
-2.   The input stream of a Storm cluster is handled by s component called Spout.
-3.   The sprout passes the data to a component called a Bolt, which transforms it in some way.
-4.   A bolt either persists the data in some sort of storages, or passes it to some other bolt. [3]
+- The work is delegated to different types of components that are each responsible for a simple specific processing task.
+- The input stream of a Storm cluster is handled by s component called Spout.
+- The sprout passes the data to a component called a Bolt, which transforms it in some way.
+- A bolt either persists the data in some sort of storages, or passes it to some other bolt. 
 
-Installation Process:
-(We use Ubuntu VirtualBox for this project)
-1) Install java for storm dependencies: 
+# How can I use Storm on my computer?
+
+# Installation Process:
+
+(We used "Ubuntu VirtualBox" for this project)
+
+1. Install java for storm dependencies: 
    sudo apt-get install default-jdk
-2) Download Zookeeper and Extract tar File:
+   
+2. Download Zookeeper and Extract tar File:
    Downloading: wget http://apache.claz.org/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
    Extracting: tar -zxf zookeeper-3.4.11.tar.gz
-3) Create configuration file and set all the parameters:
+   
+3. Create configuration file and set all the parameters:
    nano conf/zoo.cfg
    tickTime=2000
    dataDir=/home/kouys/zookeeper-3.4.11/data
    clientPort=2181
    initLimit=5
    syncLimit=2
-4) Start ZooKeeper server:
+   
+4. Start ZooKeeper server:
    bin/zkServer.sh start
-5) Start CLI:
+   
+5. Start CLI:
    bin/zkCli.sh
    After executing the above command, we will be connected to the ZooKeeper server
-6) Download Storm and Extract tar File
+   
+6. Download Storm and Extract tar File
    Downloading: wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
    Extracting: tar -xvf apache-storm-1.1.1.tar.gz
-7) Edit Configuration File:
+   
+7. Edit Configuration File:
       vi conf/storm.yaml
    storm.zookeeper.servers:
       - "localhost"
@@ -79,11 +79,24 @@ Installation Process:
     - 6701
     - 6702
     - 6703
-8) Start the Nimbus:
+    
+8. Start the Nimbus:
    bin/storm nimbus
-9) Start the Supervisor:
+   
+9. Start the Supervisor:
    bin/storm supervisor
-10)Start the UI:
-   bin/storm ui
-![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-d9e32add520e.png)
+   
+10. Start the UI:
+    bin/storm ui![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-    d9e32add520e.png)
 
+# What can I do with Storm? - Storm Application 
+
+
+
+
+
+
+
+
+
+# Reference
