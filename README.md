@@ -43,7 +43,6 @@ A topology is a graph of computation. Each node in a topology contains processin
 (We used "Ubuntu VirtualBox" for this project)
 
 1. Install java for storm dependencies: 
-
    sudo apt-get install default-jdk
    
 2. Download Zookeeper and Extract tar File:
