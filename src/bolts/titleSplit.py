@@ -17,6 +17,4 @@ class titleSplitterBolt(Bolt):
             pass
 
         for splitTitle in splitTitles:
-            #self.logger.info("matched company [{:}]".format(splitTitle))
             self.emit([splitTitle, redditTitle, redditLink])
-        # tuple acknowledgement is handled automatically

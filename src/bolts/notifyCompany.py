@@ -9,9 +9,9 @@ class notifyCompanyBolt(Bolt):
     outputs = []
 
     def process(self, tup):
-        redditTitle = tup.values[0] # extract the redditTitle
-        redditLink = tup.values[1] # extract the redditLink
-        companyName = tup.values[2]
+        redditTitle = tup.values[0] # extract the reddit Title
+        redditLink = tup.values[1] # extract the reddit Link
+        companyName = tup.values[2] # extract the company name
 
         fromaddr = "arslincars@gmail.com"
         toaddr = "mlin48@fordham.edu"
