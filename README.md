@@ -11,7 +11,7 @@ Storm was written predominantly in the Clojure programming language, but can be 
 
 # How does Storm work?
 
-# 1. Components
+## 1. Components
 
 ![picture2](https://user-images.githubusercontent.com/33638238/34182295-a41f3ffa-e4e3-11e7-93e0-8860fda6169e.png)
 
@@ -25,7 +25,7 @@ There are two kinds of nodes on a Storm cluster: the master node and the worker 
 
 - Zookeepers: Coordinate between Nimbus and the Supervisors. Storm uses Zookeeper to track configuration information about the topology; Additionally, the Nimbus daemon and Supervisor daemons are fail-fast and stateless; all state is kept in Zookeeper or on local disk. This means you can kill -9 Nimbus or the Supervisors and they'll start back up like nothing happened. This design leads to Storm clusters being incredibly stable.
 
-# 2. Topologies
+## 2. Topologies
  
  ![picture1](https://user-images.githubusercontent.com/33638238/34181883-fdeb9a58-e4e1-11e7-8b29-1382ad415ac5.png)
   
@@ -43,55 +43,36 @@ A topology is a graph of computation. Each node in a topology contains processin
 (We used "Ubuntu VirtualBox" for this project)
 
 1. Install java for storm dependencies: 
-   
    sudo apt-get install default-jdk
    
 2. Download Zookeeper and Extract tar File:
-   
    Downloading: wget http://apache.claz.org/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
-   
    Extracting: tar -zxf zookeeper-3.4.11.tar.gz
    
 3. Create configuration file and set all the parameters:
-   
    nano conf/zoo.cfg
-   
    tickTime=2000
-   
    dataDir=/home/kouys/zookeeper-3.4.11/data
-   
    clientPort=2181
-  
    initLimit=5
-   
    syncLimit=2
    
 4. Start ZooKeeper server:
-   
    bin/zkServer.sh start
    
 5. Start CLI:
-   
    bin/zkCli.sh
-   
    After executing the above command, we will be connected to the ZooKeeper server
    
 6. Download Storm and Extract tar File
-   
    Downloading: wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
-   
    Extracting: tar -xvf apache-storm-1.1.1.tar.gz
    
 7. Edit Configuration File:
-      
-      vi conf/storm.yaml
-   
+   vi conf/storm.yaml
    storm.zookeeper.servers:
-      
-      - "localhost"
-   
+   - "localhost"
    storm.local.dir: “/home/kouys/apache-storm-1.1.1/data”
-   
    nimbus.host: "localhost"
    
    supervisor.slots.ports:
@@ -101,15 +82,12 @@ A topology is a graph of computation. Each node in a topology contains processin
     - 6703
     
 8. Start the Nimbus:
-   
    bin/storm nimbus
    
 9. Start the Supervisor:
-   
    bin/storm supervisor
    
 10. Start the UI:
-    
     bin/storm ui![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-d9e32add520e.png)
 
 # What can I do with Storm? - Storm Application 
