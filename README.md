@@ -68,6 +68,7 @@ A topology is a graph of computation. Each node in a topology contains processin
    bin/zkCli.sh
 ```   
    After executing the above command, we will be connected to the ZooKeeper server
+
 6. Download Storm and Extract tar File
 ```
    wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
