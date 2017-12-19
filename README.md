@@ -64,14 +64,17 @@ A topology is a graph of computation. Each node in a topology contains processin
     bin/zkServer.sh start
 ```   
 5. Start CLI:
+```
    bin/zkCli.sh
    After executing the above command, we will be connected to the ZooKeeper server
-   
+```   
 6. Download Storm and Extract tar File
-   Downloading: wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
+```
+   wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
    Extracting: tar -xvf apache-storm-1.1.1.tar.gz
-   
+```
 7. Edit Configuration File:
+```
    vi conf/storm.yaml
    storm.zookeeper.servers:
    - "localhost"
@@ -83,15 +86,20 @@ A topology is a graph of computation. Each node in a topology contains processin
     - 6701
     - 6702
     - 6703
-    
+  ```  
 8. Start the Nimbus:
+```
    bin/storm nimbus
-   
+```   
 9. Start the Supervisor:
+```
    bin/storm supervisor
-   
+```   
 10. Start the UI:
-    bin/storm ui![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-d9e32add520e.png)
+```
+   bin/storm 
+   ```  
+   ui![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-d9e32add520e.png)
 
 # What can I do with Storm? - Storm Application 
 
