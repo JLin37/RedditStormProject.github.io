@@ -9,12 +9,13 @@
             "nimbus": "",
             "workers": [],
             "log": {
-                "path": "",
+                "path": "/var/log/storm/streamparse",
                 "max_bytes": 1000000,
                 "backup_count": 10,
                 "level": "info"
             },
-            "virtualenv_root": ""
+            "use_ssh_for_nimbus": false,
+            "virtualenv_root": "/data/virtualenvs/"
         }
     }
 }
