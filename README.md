@@ -46,22 +46,23 @@ A topology is a graph of computation. Each node in a topology contains processin
     sudo apt-get install default-jdk
 ``` 
 2. Download Zookeeper and Extract tar File:
-   Downloading: 
-       wget http://apache.claz.org/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
-   Extracting: 
-       tar -zxf zookeeper-3.4.11.tar.gz
-   
+```  
+   wget http://apache.claz.org/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
+   tar -zxf zookeeper-3.4.11.tar.gz
+```   
 3. Create configuration file and set all the parameters:
+```   
    nano conf/zoo.cfg
    tickTime=2000
    dataDir=/home/kouys/zookeeper-3.4.11/data
    clientPort=2181
    initLimit=5
    syncLimit=2
-   
+```
 4. Start ZooKeeper server:
-   bin/zkServer.sh start
-   
+```
+    bin/zkServer.sh start
+```   
 5. Start CLI:
    bin/zkCli.sh
    After executing the above command, we will be connected to the ZooKeeper server
