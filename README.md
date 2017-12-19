@@ -87,7 +87,7 @@ A topology is a graph of computation. Each node in a topology contains processin
    bin/storm supervisor
    
 10. Start the UI:
-    bin/storm ui![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-    d9e32add520e.png)
+    bin/storm ui![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-d9e32add520e.png)
 
 # What can I do with Storm? - Storm Application 
 
@@ -100,3 +100,19 @@ A topology is a graph of computation. Each node in a topology contains processin
 
 
 # Reference
+1] https://hortonworks.com/apache/storm/
+2] "A Storm is coming: more details and plans for release". Engineering Blog. Twitter Inc. Retrieved 29 July 2015.
+3] https://hortonworks.com/apache/storm/#section_4
+4] http://storm.apache.org/releases/current/Tutorial.html
+5] http://storm.apache.org/releases/current/Tutorial.html
+6] https://www.youtube.com/watch?v=E25MGixBlBI
+
+
+
+
+
+
+
+
+
+
