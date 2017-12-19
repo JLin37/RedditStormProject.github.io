@@ -19,5 +19,5 @@ class storeDataBolt(Bolt):
 			redditSubmissions_id = redditDB['redditData'].insert_one(redditData).inserted_id
 			client.close()
 		except:
-			self.fail(tup)
+			pass
 			

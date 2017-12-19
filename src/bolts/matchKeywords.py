@@ -16,8 +16,7 @@ class matchKeywordsBolt(Bolt):
                 "AMD",
                 "Nvidia",
                 "Intel",
-                "Aetna",
-                "Amazon"]
+                "Aetna"]
         for companyName in companyNames:
             if companyName == splitTitle:
                 self.logger.info("matched company [{:}]".format(companyName))
