@@ -53,11 +53,17 @@ A topology is a graph of computation. Each node in a topology contains processin
    Extracting: tar -zxf zookeeper-3.4.11.tar.gz
    
 3. Create configuration file and set all the parameters:
+   
    nano conf/zoo.cfg
+   
    tickTime=2000
+   
    dataDir=/home/kouys/zookeeper-3.4.11/data
+   
    clientPort=2181
+  
    initLimit=5
+   
    syncLimit=2
    
 4. Start ZooKeeper server:
