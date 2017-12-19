@@ -67,22 +67,33 @@ A topology is a graph of computation. Each node in a topology contains processin
    syncLimit=2
    
 4. Start ZooKeeper server:
+   
    bin/zkServer.sh start
    
 5. Start CLI:
+   
    bin/zkCli.sh
+   
    After executing the above command, we will be connected to the ZooKeeper server
    
 6. Download Storm and Extract tar File
+   
    Downloading: wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
+   
    Extracting: tar -xvf apache-storm-1.1.1.tar.gz
    
 7. Edit Configuration File:
+      
       vi conf/storm.yaml
+   
    storm.zookeeper.servers:
+      
       - "localhost"
+   
    storm.local.dir: “/home/kouys/apache-storm-1.1.1/data”
+   
    nimbus.host: "localhost"
+   
    supervisor.slots.ports:
     - 6700
     - 6701
