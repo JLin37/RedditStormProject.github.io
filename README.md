@@ -46,3 +46,43 @@ A topology is a graph of computation. Each node in a topology contains processin
 3.   The sprout passes the data to a component called a Bolt, which transforms it in some way.
 4.   A bolt either persists the data in some sort of storages, or passes it to some other bolt. [3]
 
+Installation Process:
+(We use Ubuntu VirtualBox for this project)
+1) Install java for storm dependencies: 
+   sudo apt-get install default-jdk
+2) Download Zookeeper and Extract tar File:
+   Downloading: wget http://apache.claz.org/zookeeper/zookeeper-3.4.11/zookeeper-3.4.11.tar.gz
+   Extracting: tar -zxf zookeeper-3.4.11.tar.gz
+3) Create configuration file and set all the parameters:
+   nano conf/zoo.cfg
+   tickTime=2000
+   dataDir=/home/kouys/zookeeper-3.4.11/data
+   clientPort=2181
+   initLimit=5
+   syncLimit=2
+4) Start ZooKeeper server:
+   bin/zkServer.sh start
+5) Start CLI:
+   bin/zkCli.sh
+   After executing the above command, we will be connected to the ZooKeeper server
+6) Download Storm and Extract tar File
+   Downloading: wget http://apache.mirrors.hoobly.com/storm/apache-storm-1.1.1/apache-storm-1.1.1.tar.gz
+   Extracting: tar -xvf apache-storm-1.1.1.tar.gz
+7) Edit Configuration File:
+      vi conf/storm.yaml
+   storm.zookeeper.servers:
+      - "localhost"
+   storm.local.dir: “/home/kouys/apache-storm-1.1.1/data”
+   nimbus.host: "localhost"
+   supervisor.slots.ports:
+    - 6700
+    - 6701
+    - 6702
+    - 6703
+8) Start the Nimbus:
+   bin/storm nimbus
+9) Start the Supervisor:
+   bin/storm supervisor
+10)Start the UI:
+   bin/storm ui
+
