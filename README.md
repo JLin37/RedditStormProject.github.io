@@ -38,7 +38,7 @@ A topology is a graph of computation. Each node in a topology contains processin
 
 # How can I use Storm on my computer?
 
-# Installation Process:
+## Installation Process:
 
 (We used "Ubuntu VirtualBox" for this project)
 
