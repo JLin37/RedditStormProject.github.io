@@ -4,7 +4,7 @@
 
 Apache-Storm is a free and open source distributed realtime computation system. The system processes large volumes of high-velocity data, which requires Storm to be extremely fast, scalable, fault-tolerant, reliable and easy to operate. Storm has the ability to process over a million records per second per node on a cluster, with parallel calculations that run across a cluster of machines. It automatically restarts workers or nodes when they die to stay fault-tolerant. Storm guarantees that each unit of data is processed at least once or exactly once and stays reliable. 
 
-Storm uses custom created “sprouts” and “bolts” to define information sources and manipulations to allow batch, distributed processing of streaming data. With sprouts and bolts acting as the graph vertices, Storm application is designed as a “topology” in the shape of a directed acyclic graph. Together, the topology serves the role of data transformation pipeline. When the data comes in, it is processed and the results are passed into Hadoop.
+Storm uses custom created “spouts” and “bolts” to define information sources and manipulations to allow batch, distributed processing of streaming data. With sprouts and bolts acting as the graph vertices, Storm application is designed as a “topology” in the shape of a directed acyclic graph. Together, the topology serves the role of data transformation pipeline. When the data comes in, it is processed and the results are passed into Hadoop.
 We will look into the topology of the system more in-depth later on in this tutorial.
 
 Storm was written predominantly in the Clojure programming language, but can be used with any programming language and many use cases. Lately, it is popular for realtime analytics, online machine learning, continuous computation, data monetization, operational dashboards and cyber security analytics and threat detection. Recent progress in Storm includes, adding reliable realtime data processing capabilities to Enterprise Hadoop, integrates with YARN by Apache Slider for YARN to manage Storm while considering cluster resources for data governance, security and operations components of a modern big data architecture such as Lambda Architecture. 
@@ -158,7 +158,7 @@ pip install streamparse
 Once this is setup and installed let's getting into coding.
 We saw early the idea behind topology, bolts and spouts, now we will look at how to implement it in code.
 
-First we have the topology:
+### First we have the topology:
 ```python
 from streamparse import Grouping, Topology
 ```
@@ -167,14 +167,14 @@ Grouping is the way in which storm determines how to distrubute the data. We hav
 - Shuffle grouping: Tuples are randomly distributed across the bolt’s tasks in a way such that each bolt is guaranteed to get an equal number of tuples. This is the default grouping if no other is specified.
 - Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the “user-id” field, tuples with the same “user-id” will always go to the same task, but tuples with different “user-id”’s may go to different tasks.
 
-Then we have to import the bolts and spouts into our topology:
+### Then we have to import the bolts and spouts into our topology:
 ```python
 from bolts.titleAnalysis import titleAnalysisBolt
 from bolts.matchKeywords import matchKeywordsBolt
 from spouts.redditStream import streamRedditSpout
 ```
 
-Finally we have setup the topology:
+### Finally we have setup the topology:
 - first we create a class object, that take Topology as a paramenter
 - Then we specify the flow of data (Tuples), the grouping and ```par = 2``` which is the number of parallel processes each bolt will be run on.
 - Data will always start from a Spout, but bolts can also get data from other bolts.
@@ -187,7 +187,7 @@ class redditProject(Topology):
 		titleAnalysis_bolt: Grouping.fields('splitTitle')}, par = 2)
 ```
 
-Now let's move onto the Spout:
+### Now let's move onto the Spout:
 ```python
 from streamparse.spout import Spout
 ```
@@ -197,13 +197,13 @@ from streamparse.spout import Spout
 class streamRedditSpout(Spout):
     outputs = ['redditTitle', 'redditLink']
 ```
-Once the class is setup, two critical methods are called and implemented:
+### Once the class is setup, two critical methods are called and implemented:
 - ```def initialize(self, stormconf, context):```, where you setup the parameter for the next method ```next_tuple```, 
 *do not make the same mistake I did by think this is where you setup your initial data stream structure, it can be used simply for a basic generator that can looped later*
 - ```def next_tuple(self):```, is where you would iterate through the stream of data that is coming from your generator. We send the data to the bolts by: ```self.emit([redditTitle, redditLink])```
 - Two other methods are called too ```def ack(self, tup_id):``` and ```def fail(self, tup_id):```, these are mostly used for error handling, and some basic error is already predefined for you, however if you would like to further customize it, feel free to do so.
 
-Finally we move onto the Bolt:
+### Finally we move onto the Bolt:
 ```python
 from streamparse import Bolt
 ```
