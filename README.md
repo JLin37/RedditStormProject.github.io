@@ -90,6 +90,8 @@ A topology is a graph of computation. Each node in a topology contains processin
     - 6703
 ```  
    Storm Cluster
+   - The main idea behind clustering storm is simply to have the ```conf/storm.yaml``` file replace localhost with IP address of the different components on the cluster.
+   - Every worker node will also have storm installed and a similar set of ```conf/storm.yaml``` files setup.
  ```  
    storm.zookeeper.servers:
    - "10.216.93.44"
@@ -147,16 +149,17 @@ class WordCount(Topology):
 
 ## How to code a Storm Application - "Python Edition" featuring "Streamparse"
 
-There is an awesome python package called [Streamparse](https://streamparse.readthedocs.io/en/stable/index.html)
+There is an awesome python package called [Streamparse](https://streamparse.readthedocs.io/en/stable/index.html),
 it's dependency are "JDK", "lein" and of-course Apache-Storm
-to install, simply use:
+
+To install streamparse, simply use:
 ```
 pip install streamparse
 ```
 *one thing to note, you should place storm into system path, so it can be reached by streamparse.*
 
 Once this is setup and installed let's get into coding.
-We saw early the idea behind topology, bolts and spouts, now we will look at how to implement it in code.
+We saw earlier the idea behind topology, bolts and spouts, now we will look at how to implement it in code.
 
 ### First we have the topology:
 ```python
