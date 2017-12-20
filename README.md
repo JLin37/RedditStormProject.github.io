@@ -87,7 +87,7 @@ A topology is a graph of computation. Each node in a topology contains processin
     - 6701
     - 6702
     - 6703
-  ```  
+```  
 8. Start the Nimbus:
 ```
    bin/storm nimbus
