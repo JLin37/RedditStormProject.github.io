@@ -206,7 +206,7 @@ class titleAnalysisBolt(Bolt):
 - We extract the tuple by: ```variable = tup.values[0]```
 - Here since output is opional based on design, so is ```self.emit()```.
 
-#That about wraps it up. Thank you for reading, and happy coding!
+# *That about wraps it up. Thank you for reading, and happy coding!
 
 # Reference
 1] (https://hortonworks.com/apache/storm/)
