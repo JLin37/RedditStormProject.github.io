@@ -120,6 +120,11 @@ A topology is a graph of computation. Each node in a topology contains processin
    ```  
    ![qq 20171219174135](https://user-images.githubusercontent.com/33636455/34182522-a16d2500-e4e4-11e7-9c3e-d9e32add520e.png)
 
+### Notes on Clustering
+   - *The documentation on from Apache Storm's [Official Site](http://storm.apache.org/releases/1.0.3/Setting-up-a-Storm-cluster.html) isn't clear on how to handle clustering.*
+   - *However, the main idea behind clustering storm is simply to have the ```conf/storm.yaml``` file replace localhost with IP address of the different components on the cluster*
+   - *Every worker node will also have storm installed and a similar set of ```conf/storm.yaml``` files setup*
+
 # What can I do with Storm? - Storm Application 
 
 We chose to implement a marketing tool using Storm that creates a real-time notification system which informs subscribed companies of new discussions about them. 
