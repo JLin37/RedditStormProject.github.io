@@ -32,8 +32,8 @@ There are two kinds of nodes on a Storm cluster: the master node and the worker 
 A topology is a graph of computation. Each node in a topology contains processing logic, and links between nodes indicate how data should be passed around between nodes.
 
 - The work is delegated to different types of components that are each responsible for a simple specific processing task.
-- The input stream of a Storm cluster is handled by s component called Spout.
-- The sprout passes the data to a component called a Bolt, which transforms it in some way.
+- The input stream of a Storm cluster is handled by Spout.
+- The sprout passes the data to a Bolt, which transforms it in some way.
 - A bolt either persists the data in some sort of storages, or passes it to some other bolt. 
 
 # How can I use Storm on my computer?
