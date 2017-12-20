@@ -94,8 +94,6 @@ A topology is a graph of computation. Each node in a topology contains processin
     - 6703
 ```  
    Storm Cluster
-   	The main idea behind clustering storm is simply to have the ```conf/storm.yaml``` file replace localhost with IP address of the different components on the cluster
-   	Every worker node will also have storm installed and a similar set of ```conf/storm.yaml``` files setup:
 ```  
    storm.zookeeper.servers:
    - "10.216.93.44"
