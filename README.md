@@ -133,11 +133,43 @@ class WordCount(Topology):
 
 # How to code a Storm Application "Python Edition"
 
-There is a awesome python package called [Streamparse]https://streamparse.readthedocs.io/en/stable/index.html
+There is a awesome python package called [Streamparse](https://streamparse.readthedocs.io/en/stable/index.html)
 it's dependency are "JDK", "lein" and of-course Apache-Storm
 to install, simply use:
 ```
 pip install streamparse
+```
+*one thing to note, is that you should place storm into system path, so it can be reached by streamparse.
+
+Once this is setup and install let's getting into coding.
+We saw early the idea behind topology, bolts and spouts, now we will look at how to implement it in code.
+
+First we have the topology:
+```
+from streamparse import Grouping, Topology
+```
+Import methods from the streamparse class to import is Grouping and Topology.
+Grouping is the way in which storm determines how to distrubute the data. We have:
+- Shuffle grouping: Tuples are randomly distributed across the bolt’s tasks in a way such that each bolt is guaranteed to get an equal number of tuples. This is the default grouping if no other is specified.
+- Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the “user-id” field, tuples with the same “user-id” will always go to the same task, but tuples with different “user-id”’s may go to different tasks.
+
+Then we have to import the bolts and spouts into our topology:
+```
+from bolts.titleAnalysis import titleAnalysisBolt
+from bolts.matchKeywords import matchKeywordsBolt
+from bolts.notifyCompany import notifyCompanyBolt
+from bolts.storeData import storeDataBolt
+from spouts.redditStream import streamRedditSpout
+```
+
+Finally we have setup the topology:
+- first we create a class object, that take Topology as a paramenter
+- Then we specify the flow of data (Tuples), the grouping and ```par = 2``` which is the number of parallel processes each bolt will be run on.
+```
+class redditProject(Topology):
+	redditStream_spout = streamRedditSpout.spec()
+	titleAnalysis_bolt = titleAnalysisBolt.spec(inputs = {
+		redditStream_spout: Grouping.fields('redditTitle')}, par = 4)
 ```
 
 
