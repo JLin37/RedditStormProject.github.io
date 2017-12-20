@@ -118,7 +118,7 @@ A topology is a graph of computation. Each node in a topology contains processin
 
 # What can I do with Storm? - Storm Application 
 
-We chose to implement a marketing tool using Storm, that creates a real-time notification system which informs subscribed companies of new discussions about them. 
+We chose to implement a marketing tool using Storm that creates a real-time notification system which informs subscribed companies of new discussions about them. 
 
 An overview of our topology is shown below:
 ```python
@@ -145,17 +145,17 @@ class WordCount(Topology):
 5.  Save the relevant data 
   - Implemented “storeData” as a bolt
 
-# How to code a Storm Application. "Python Edition" featuring "Streamparse"
+## How to code a Storm Application - "Python Edition" featuring "Streamparse"
 
-There is a awesome python package called [Streamparse](https://streamparse.readthedocs.io/en/stable/index.html)
+There is an awesome python package called [Streamparse](https://streamparse.readthedocs.io/en/stable/index.html)
 it's dependency are "JDK", "lein" and of-course Apache-Storm
 to install, simply use:
 ```
 pip install streamparse
 ```
-*one thing to note, is that you should place storm into system path, so it can be reached by streamparse.*
+*one thing to note, you should place storm into system path, so it can be reached by streamparse.*
 
-Once this is setup and installed let's getting into coding.
+Once this is setup and installed let's get into coding.
 We saw early the idea behind topology, bolts and spouts, now we will look at how to implement it in code.
 
 ### First we have the topology:
@@ -167,15 +167,15 @@ Grouping is the way in which storm determines how to distrubute the data. We hav
 - Shuffle grouping: Tuples are randomly distributed across the bolt’s tasks in a way such that each bolt is guaranteed to get an equal number of tuples. This is the default grouping if no other is specified.
 - Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the “user-id” field, tuples with the same “user-id” will always go to the same task, but tuples with different “user-id”’s may go to different tasks.
 
-### Then we have to import the bolts and spouts into our topology:
+### Then we have to import bolts and spouts into our topology:
 ```python
 from bolts.titleAnalysis import titleAnalysisBolt
 from bolts.matchKeywords import matchKeywordsBolt
 from spouts.redditStream import streamRedditSpout
 ```
 
-### Finally we have setup the topology:
-- first we create a class object, that take Topology as a paramenter
+### Finally we have to setup the topology:
+- First, we create a class object that takes Topology as a paramenter
 - Then we specify the flow of data (Tuples), the grouping and ```par = 2``` which is the number of parallel processes each bolt will be run on.
 - Data will always start from a Spout, but bolts can also get data from other bolts.
 ```python
@@ -207,8 +207,8 @@ class streamRedditSpout(Spout):
 ```python
 from streamparse import Bolt
 ```
-- Bolts are pretty straight forward, it's where you process the tuples that come from your Spout/s.
-- Once we import the Bold method from streamparse, we create the Bolt class object, that takes Bolt as a parameter
+- Bolts are pretty straight forward, it's where you process the tuples that come from your Spouts.
+- Once we import the Bolt method from streamparse, we create the Bolt class object, that takes Bolt as a parameter
 - For the outputs, it is up to you if want there to be any, since some bolts simply handle a process while others may need to pass tuples onto another bolt.
 ```python
 class titleAnalysisBolt(Bolt):
@@ -218,7 +218,7 @@ class titleAnalysisBolt(Bolt):
 - We extract the tuple by: ```variable = tup.values[0]```
 - Here since output is opional based on design, so is ```self.emit()```.
 
-*That about wraps it up. Thank you for reading, and happy coding!*
+*That wraps it up. Thank you for reading, and happy coding!*
 
 # Reference
 1] (https://hortonworks.com/apache/storm/)
