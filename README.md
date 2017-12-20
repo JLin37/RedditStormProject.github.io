@@ -53,6 +53,8 @@ A topology is a graph of computation. Each node in a topology contains processin
 3. Create configuration file and set all the parameters:
 ```   
    nano conf/zoo.cfg
+```
+```
    tickTime=2000
    dataDir=/home/kouys/zookeeper-3.4.11/data
    clientPort=2181
@@ -79,6 +81,8 @@ A topology is a graph of computation. Each node in a topology contains processin
    Local Host
 ```
    nano conf/storm.yaml
+```
+```
    storm.zookeeper.servers:
    - "localhost"
    storm.local.dir: “/home/kouys/apache-storm-1.1.1/data”
