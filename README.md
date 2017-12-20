@@ -75,19 +75,32 @@ A topology is a graph of computation. Each node in a topology contains processin
    tar -xvf apache-storm-1.1.1.tar.gz
 ```
 7. Edit Configuration File:
+   Local Host
 ```
-   vi conf/storm.yaml
+   nano conf/storm.yaml
    storm.zookeeper.servers:
    - "localhost"
    storm.local.dir: “/home/kouys/apache-storm-1.1.1/data”
    nimbus.host: "localhost"
-   
    supervisor.slots.ports:
     - 6700
     - 6701
     - 6702
     - 6703
 ```  
+   Storm Cluster
+ ```  
+   storm.zookeeper.servers:
+   - "10.216.93.44"
+   storm.local.dir: “/home/jason/apache-storm-1.1.1/data”
+   nimbus.host: "10.216.90.224"
+   nimbus.seeds: ["10.216.93.44"]
+   supervisor.slots.ports:
+   - 6700
+   - 6701
+   - 6702
+   - 6703
+```
 8. Start the Nimbus:
 ```
    bin/storm nimbus
