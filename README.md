@@ -104,6 +104,33 @@ A topology is a graph of computation. Each node in a topology contains processin
 
 # What can I do with Storm? - Storm Application 
 
+Implement Marketing tool is a Storm application that creates a real-time notification system that informs subscribed companies of new discussions about them. 
+
+An overview of our topology is shown below:
+```python
+class WordCount(Topology):
+	redditStream_spout = streamRedditSpout.spec()
+	titleAnalysis_bolt = titleAnalysisBolt.spec(inputs = {
+		redditStream_spout: Grouping.fields('redditTitle')}, par = 4)
+	matchKeywords_bolt = matchKeywordsBolt.spec(inputs = {
+		titleAnalysis_bolt: Grouping.fields('splitTitle')}, par = 2)
+	notifyCompany_bolt = notifyCompanyBolt.spec(inputs = {
+		matchKeywords_bolt: Grouping.fields('companyName')}, par = 2)
+	storeData_bolt = storeDataBolt.spec(inputs = {
+		matchKeywords_bolt: Grouping.fields('redditTitle')}, par = 1)
+```
+
+1. Streams new post on reddit in real-time.
+  - Implemented “redditStream” as a spout
+2. Categorize the post based on its title.
+  - Implemented “titleAnalysis” as a bolt
+3. Process data and decides if the subscribed companies are being discussed.
+  - Implemented “matchKeywords”as a bolt
+4.   Push notification sent to companies including post title and post link.
+  - Implemented “notifyCompany” as a bolt
+5.  Save the relevant data 
+  - Implemented “storeData” as a bolt
+
 
 
 
