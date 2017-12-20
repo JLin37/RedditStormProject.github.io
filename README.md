@@ -104,7 +104,7 @@ A topology is a graph of computation. Each node in a topology contains processin
 
 # What can I do with Storm? - Storm Application 
 
-Implement Marketing tool is a Storm application that creates a real-time notification system that informs subscribed companies of new discussions about them. 
+We chose to implement a marketing tool using Storm, that creates a real-time notification system which informs subscribed companies of new discussions about them. 
 
 An overview of our topology is shown below:
 ```python
@@ -131,7 +131,7 @@ class WordCount(Topology):
 5.  Save the relevant data 
   - Implemented “storeData” as a bolt
 
-# How to code a Storm Application "Python Edition"
+# How to code a Storm Application. "Python Edition" featuring "Streamparse"
 
 There is a awesome python package called [Streamparse](https://streamparse.readthedocs.io/en/stable/index.html)
 it's dependency are "JDK", "lein" and of-course Apache-Storm
@@ -139,16 +139,16 @@ to install, simply use:
 ```
 pip install streamparse
 ```
-*one thing to note, is that you should place storm into system path, so it can be reached by streamparse.
+*one thing to note, is that you should place storm into system path, so it can be reached by streamparse.*
 
-Once this is setup and install let's getting into coding.
+Once this is setup and installed let's getting into coding.
 We saw early the idea behind topology, bolts and spouts, now we will look at how to implement it in code.
 
 First we have the topology:
 ```python
 from streamparse import Grouping, Topology
 ```
-Import methods from the streamparse class to import is Grouping and Topology.
+Import methods from the streamparse class: Grouping and Topology.
 Grouping is the way in which storm determines how to distrubute the data. We have:
 - Shuffle grouping: Tuples are randomly distributed across the bolt’s tasks in a way such that each bolt is guaranteed to get an equal number of tuples. This is the default grouping if no other is specified.
 - Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the “user-id” field, tuples with the same “user-id” will always go to the same task, but tuples with different “user-id”’s may go to different tasks.
@@ -157,8 +157,6 @@ Then we have to import the bolts and spouts into our topology:
 ```python
 from bolts.titleAnalysis import titleAnalysisBolt
 from bolts.matchKeywords import matchKeywordsBolt
-from bolts.notifyCompany import notifyCompanyBolt
-from bolts.storeData import storeDataBolt
 from spouts.redditStream import streamRedditSpout
 ```
 
@@ -180,15 +178,15 @@ Now let's move onto the Spout:
 from streamparse.spout import Spout
 ```
 - After importing the Spout method from streamparse, we create a Spout class object, that takes Spout as a paramenter
-- We must also declare the output/s Tuples of the Spout:
+- We must also declare the output Tuples of the Spout:
 ```python
 class streamRedditSpout(Spout):
     outputs = ['redditTitle', 'redditLink']
 ```
-Once class is setup, two critical methods are called and implemented:
+Once the class is setup, two critical methods are called and implemented:
 - ```def initialize(self, stormconf, context):```, where you setup the parameter for the next method ```next_tuple```, 
 *do not make the same mistake I did by think this is where you setup your initial data stream structure, it can be used simply for a basic generator that can looped later*
-- ```def next_tuple(self):```, is where you would iterate through the stream of data that you coming from your generator. We send the data to the bolts by: ```self.emit([redditTitle, redditLink])```
+- ```def next_tuple(self):```, is where you would iterate through the stream of data that is coming from your generator. We send the data to the bolts by: ```self.emit([redditTitle, redditLink])```
 - Two other methods are called too ```def ack(self, tup_id):``` and ```def fail(self, tup_id):```, these are mostly used for error handling, and some basic error is already predefined for you, however if you would like to further customize it, feel free to do so.
 
 Finally we move onto the Bolt:
@@ -206,7 +204,7 @@ class titleAnalysisBolt(Bolt):
 - We extract the tuple by: ```variable = tup.values[0]```
 - Here since output is opional based on design, so is ```self.emit()```.
 
-*That about wraps it up. Thank you for reading, and happy coding!
+*That about wraps it up. Thank you for reading, and happy coding!*
 
 # Reference
 1] (https://hortonworks.com/apache/storm/)
