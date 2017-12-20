@@ -131,6 +131,15 @@ class WordCount(Topology):
 5.  Save the relevant data 
   - Implemented “storeData” as a bolt
 
+# How to code a Storm Application "Python Edition"
+
+There is a awesome python package called [Streamparse]https://streamparse.readthedocs.io/en/stable/index.html
+it's dependency are "JDK", "lein" and of-course Apache-Storm
+to install, simply use:
+```
+pip install streamparse
+```
+
 
 
 
