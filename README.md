@@ -75,6 +75,7 @@ A topology is a graph of computation. Each node in a topology contains processin
    tar -xvf apache-storm-1.1.1.tar.gz
 ```
 7. Edit Configuration File:
+   
    Local Host
 ```
    nano conf/storm.yaml
